@@ -17,25 +17,18 @@ class Settings(BaseSettings):
     PIN: int = 3
     DOOR_STATE: List[str] = [DoorState.CLOSED, DoorState.OPEN]
 
-
-class PushedCoSettings(Settings):
+    # pushed.co settings
     PUSHED_APP_KEY: str
     PUSHED_SECRET: str
     PUSHED_API_URL: AnyUrl
     PUSHED_TARGET_TYPE: str
     PUSHED_TARGET_ALIAS: str
 
-
-class PushoverSettings(Settings):
+    # pushover settings
     PUSHOVER_TOKEN: str
     PUSHOVER_USER: str
     PUSHOVER_URL: AnyUrl
 
 
-if os.getenv("PUSHED_API_URL"):
-    settings = PushedCoSettings()
-elif os.getenv("PUSHOVER_URL"):
-    settings = PushoverSettings()
-else:
-    settings = Settings()
+settings = Settings()
 
