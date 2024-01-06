@@ -1,15 +1,15 @@
 import requests
-from services.pushed_co.schema import PushedRequest
+from services.pushover.schema import PushoverRequest
 from config import settings
 
 
-class PushedApiRequest:
-    url = settings.PUSHED_API_URL
+class PushoverApiRequest:
+    url = settings.PUSHOVER_URL
     status_code = None
     response = None
 
     def send_notification(self, message):
-        payload = PushedRequest(content=message)
+        payload = PushoverRequest(message=message)
         self.response = requests.post(self.url, data=payload.__dict__)
         self.status_code = self.response.status_code
 

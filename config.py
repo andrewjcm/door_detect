@@ -1,3 +1,6 @@
+import os
+import logging
+from pydantic import AnyUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -8,11 +11,30 @@ class DoorState:
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env')
+    DOOR_NAME: str = ""
     PIN: int = 3
+    DOOR_STATE = [DoorState.CLOSED, DoorState.OPEN]
+    LOG = logging.getLogger(__name__)
+
+
+class PushedCoSettings(Settings):
     PUSHED_APP_KEY: str
     PUSHED_SECRET: str
-    PUSHED_API_URL: str
+    PUSHED_API_URL: AnyUrl
+    PUSHED_TARGET_TYPE: str
+    PUSHED_TARGET_ALIAS: str
 
 
-settings = Settings()
-door_state = DoorState()
+class PushoverSettings(Settings):
+    PUSHOVER_TOKEN: str
+    PUSHOVER_USER: str
+    PUSHOVER_URL: AnyUrl
+
+
+if os.getenv("PUSHED_API_URL"):
+    settings = PushedCoSettings()
+elif os.getenv("PUSHOVER_URL"):
+    settings = PushoverSettings()
+else:
+    settings = Settings()
+

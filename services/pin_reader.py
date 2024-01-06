@@ -1,11 +1,10 @@
 import RPi.GPIO as GPIO
-from config import settings, door_state
+from config import settings
 
 
 class PinReader:
     previous_state = None
     current_state = None
-    door_states = [door_state.CLOSED, door_state.OPEN]
 
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
@@ -18,10 +17,10 @@ class PinReader:
 
     @property
     def state_changed(self):
-        if self.previous_state is None and self.current_state == door_state.OPEN:
+        if self.previous_state is None and self.current_state == settings.DOOR_STATE.index("Door is open"):
             return True
         return self.previous_state != self.current_state
 
     @property
     def state_message(self):
-        return self.door_states[self.current_state]
+        return f"[{settings.DOOR_NAME}] {settings.DOOR_STATE[self.current_state]}"
