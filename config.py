@@ -1,6 +1,6 @@
 import os
 import logging
-from typing import List
+from typing import List, Optional
 
 from pydantic import AnyUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -18,16 +18,16 @@ class Settings(BaseSettings):
     DOOR_STATE: List[str] = [DoorState.CLOSED, DoorState.OPEN]
 
     # pushed.co settings
-    PUSHED_APP_KEY: str
-    PUSHED_SECRET: str
-    PUSHED_API_URL: AnyUrl
-    PUSHED_TARGET_TYPE: str
-    PUSHED_TARGET_ALIAS: str
+    PUSHED_APP_KEY: Optional[str]
+    PUSHED_SECRET: Optional[str]
+    PUSHED_API_URL: Optional[AnyUrl]
+    PUSHED_TARGET_TYPE: Optional[str]
+    PUSHED_TARGET_ALIAS: Optional[str]
 
     # pushover settings
-    PUSHOVER_TOKEN: str
-    PUSHOVER_USER: str
-    PUSHOVER_URL: AnyUrl
+    PUSHOVER_TOKEN: Optional[str]
+    PUSHOVER_USER: Optional[str]
+    PUSHOVER_URL: Optional[AnyUrl]
 
 
 settings = Settings()
