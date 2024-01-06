@@ -10,7 +10,7 @@ class PushedApiRequest:
 
     def send_notification(self, message):
         payload = PushedRequest(content=message)
-        self.response = requests.post(self.url, data=payload)
+        self.response = requests.post(self.url, data=payload.__dict__)
         self.status_code = self.response.status_code
 
     @property
