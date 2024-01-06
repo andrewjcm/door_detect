@@ -1,5 +1,5 @@
 import requests
-from schema import PushedRequest
+from services.pushed_co.schema import PushedRequest
 from config import settings
 
 
