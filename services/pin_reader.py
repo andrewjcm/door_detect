@@ -24,4 +24,4 @@ class PinReader:
 
     @property
     def state_message(self):
-        return door_state[self.current_state]
+        return self.door_states[self.current_state]
