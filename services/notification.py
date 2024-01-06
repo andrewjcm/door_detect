@@ -1,6 +1,9 @@
 from services.pushed_co.notification import PushedApiRequest
 from services.pushover.notification import PushoverApiRequest
 from config import settings
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def send_notification(message):
@@ -11,10 +14,10 @@ def send_notification(message):
         notification = PushoverApiRequest()
         notification.send_notification(message)
     else:
-        notification = settings.LOG
+        notification = logger
         notification.info(msg=message)
     if hasattr(settings, "success"):
-        log = settings.LOG
+        log = logger
         if notification.success:
             log.info(msg=message)
         else:

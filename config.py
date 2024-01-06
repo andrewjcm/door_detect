@@ -1,5 +1,7 @@
 import os
 import logging
+from typing import List
+
 from pydantic import AnyUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -13,8 +15,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env')
     DOOR_NAME: str = ""
     PIN: int = 3
-    DOOR_STATE = [DoorState.CLOSED, DoorState.OPEN]
-    LOG = logging.getLogger(__name__)
+    DOOR_STATE: List[str] = [DoorState.CLOSED, DoorState.OPEN]
 
 
 class PushedCoSettings(Settings):
