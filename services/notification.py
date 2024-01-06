@@ -1,4 +1,4 @@
-from pushed_co.notification import PushedApiRequest
+from services.pushed_co.notification import PushedApiRequest
 
 
 def send_pushed_notification(message):
