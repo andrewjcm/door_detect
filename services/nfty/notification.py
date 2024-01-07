@@ -3,7 +3,7 @@ from config import settings
 
 
 class NftyApiRequest:
-    url = settings.NFTY_URL + "/" + settings.NFTY_TOPIC_ID
+    url = str(settings.NFTY_URL) + "/" + settings.NFTY_TOPIC_ID
     status_code = None
     response = None
 
