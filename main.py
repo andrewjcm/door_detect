@@ -11,6 +11,8 @@ def main():
         pin_reader.update_state()
         if pin_reader.state_changed:
             send_notification(pin_reader.state_message)
+        elif pin_reader.is_open_time_elapsed(incremental_minutes=30):
+            send_notification(pin_reader.state_time_elapsed_message)
 
 
 if __name__ == "__main__":

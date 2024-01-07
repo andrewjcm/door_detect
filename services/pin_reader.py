@@ -2,6 +2,7 @@ from typing import Optional
 
 import RPi.GPIO as GPIO
 from config import settings
+from datetime import datetime, timedelta
 
 
 class PinReader:
@@ -17,13 +18,30 @@ class PinReader:
     def update_state(self) -> None:
         self.previous_state = self.current_state
         self.current_state = GPIO.input(settings.PIN)
+        if self.state_changed:
+            self.time_state_changed = datetime.now()
 
     @property
-    def state_changed(self):
-        if self.previous_state is None and self.current_state == settings.DOOR_STATE.index("Door is open"):
+    def state_changed(self) -> bool:
+        if self.previous_state is None and self.is_open:
             return True
         return self.previous_state != self.current_state
 
     @property
-    def state_message(self):
+    def state_message(self) -> str:
         return f"[{settings.DOOR_NAME}] {settings.DOOR_STATE[self.current_state]}"
+
+    @property
+    def state_time_elapsed_message(self) -> str:
+        return self.state_message + f"(time elapsed: {self.time_passed_since_state_change})"
+
+    @property
+    def time_passed_since_state_change(self) -> timedelta:
+        return datetime.now() - self.time_state_changed
+
+    @property
+    def is_open(self) -> bool:
+        return self.current_state == settings.DOOR_STATE.index("Door is open")
+
+    def is_open_time_elapsed(self, incremental_minutes) -> bool:
+        return self.is_open and self.time_passed_since_state_change % timedelta(minutes=incremental_minutes) == 0
