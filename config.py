@@ -18,16 +18,16 @@ class Settings(BaseSettings):
     DOOR_STATE: List[str] = [DoorState.CLOSED, DoorState.OPEN]
 
     # pushed.co settings
-    PUSHED_APP_KEY: Optional[str]
-    PUSHED_SECRET: Optional[str]
-    PUSHED_API_URL: Optional[AnyUrl]
-    PUSHED_TARGET_TYPE: Optional[str]
-    PUSHED_TARGET_ALIAS: Optional[str]
+    PUSHED_APP_KEY: Optional[str] = None
+    PUSHED_SECRET: Optional[str] = None
+    PUSHED_API_URL: Optional[AnyUrl] = None
+    PUSHED_TARGET_TYPE: Optional[str] = None
+    PUSHED_TARGET_ALIAS: Optional[str] = None
 
     # pushover settings
-    PUSHOVER_TOKEN: Optional[str]
-    PUSHOVER_USER: Optional[str]
-    PUSHOVER_URL: Optional[AnyUrl]
+    PUSHOVER_TOKEN: Optional[str] = None
+    PUSHOVER_USER: Optional[str] = None
+    PUSHOVER_URL: Optional[AnyUrl] = None
 
 
 settings = Settings()
