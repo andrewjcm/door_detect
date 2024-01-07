@@ -1,17 +1,20 @@
+from typing import Optional
+
 import RPi.GPIO as GPIO
 from config import settings
 
 
 class PinReader:
-    previous_state = None
-    current_state = None
+    previous_state: Optional[int] = None
+    current_state: Optional[int] = None
+    time_state_changed: Optional[datetime] = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(settings.PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.update_state()
 
-    def update_state(self):
+    def update_state(self) -> None:
         self.previous_state = self.current_state
         self.current_state = GPIO.input(settings.PIN)
 
