@@ -11,17 +11,17 @@ logger.setLevel(logging.INFO)
 def send_notification(message):
     if settings.PUSHED_API_URL:
         notification = PushedApiRequest(message)
-        notification.send_notification()
+        notification.send()
     elif settings.PUSHOVER_URL:
         notification = PushoverApiRequest(message)
-        notification.send_notification()
+        notification.send()
     elif settings.NFTY_URL:
         notification = NftyApiRequest(message)
-        notification.send_notification()
+        notification.send()
     else:
         notification = logger
         notification.info(msg=message)
-    if hasattr(notification, "success"):
+    if hasattr(notification, "status_code"):
         log = logger
         if notification.success:
             log.info(msg=f"Message send successfully: {message}")

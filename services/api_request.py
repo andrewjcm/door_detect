@@ -10,7 +10,7 @@ class BaseApiRequest:
     status_code = None
     response = None
 
-    def send_notification(self):
+    def send(self):
         self.response = requests.post(self.url, data=self.payload)
         self.status_code = self.response.status_code
 
