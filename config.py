@@ -29,6 +29,10 @@ class Settings(BaseSettings):
     PUSHOVER_USER: Optional[str] = None
     PUSHOVER_URL: Optional[AnyUrl] = None
 
+    # nfty settings
+    NFTY_URL: Optional[AnyUrl] = None
+    NFTY_TOPIC_ID: Optional[str] = None
+
 
 settings = Settings()
 

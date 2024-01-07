@@ -1,5 +1,6 @@
 from services.pushed_co.notification import PushedApiRequest
 from services.pushover.notification import PushoverApiRequest
+from services.nfty.notification import NftyApiRequest
 from config import settings
 import logging
 
@@ -12,6 +13,9 @@ def send_notification(message):
         notification.send_notification(message)
     elif settings.PUSHOVER_URL:
         notification = PushoverApiRequest()
+        notification.send_notification(message)
+    elif settings.NFTY_URL:
+        notification = NftyApiRequest()
         notification.send_notification(message)
     else:
         notification = logger
