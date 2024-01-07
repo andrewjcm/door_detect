@@ -1,18 +1,12 @@
-import requests
+from services.api_request import BaseApiRequest
 from services.pushed_co.schema import PushedRequest
 from config import settings
 
 
-class PushedApiRequest:
+class PushedApiRequest(BaseApiRequest):
     url = settings.PUSHED_API_URL
     status_code = None
     response = None
 
-    def send_notification(self, message):
-        payload = PushedRequest(content=message)
-        self.response = requests.post(self.url, data=payload.__dict__)
-        self.status_code = self.response.status_code
-
-    @property
-    def success(self):
-        return self.status_code == requests.codes["ok"]
+    def __init__(self, message):
+        self.payload = PushedRequest(content=message).__dict__

@@ -5,18 +5,19 @@ from config import settings
 import logging
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 def send_notification(message):
     if settings.PUSHED_API_URL:
-        notification = PushedApiRequest()
-        notification.send_notification(message)
+        notification = PushedApiRequest(message)
+        notification.send_notification()
     elif settings.PUSHOVER_URL:
-        notification = PushoverApiRequest()
-        notification.send_notification(message)
+        notification = PushoverApiRequest(message)
+        notification.send_notification()
     elif settings.NFTY_URL:
-        notification = NftyApiRequest()
-        notification.send_notification(message)
+        notification = NftyApiRequest(message)
+        notification.send_notification()
     else:
         notification = logger
         notification.info(msg=message)
