@@ -14,7 +14,6 @@ class PinReader:
     def __init__(self) -> None:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(settings.PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        self.update_state()
 
     def update_state(self) -> None:
         self.previous_state = self.current_state
