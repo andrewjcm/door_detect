@@ -40,8 +40,12 @@ class PinReader:
         return datetime.now() - self.time_state_changed
 
     @property
+    def time_passed_since_state_change_minutes(self) -> int:
+        return self.time_passed_since_state_change.seconds // 3600
+
+    @property
     def is_open(self) -> bool:
         return self.current_state == settings.DOOR_STATE.index("Door is open")
 
     def is_open_time_elapsed(self, incremental_minutes) -> bool:
-        return self.is_open and self.time_passed_since_state_change % timedelta(minutes=incremental_minutes) == 0
+        return self.is_open and self.time_passed_since_state_change_minutes % incremental_minutes == 0
