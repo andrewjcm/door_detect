@@ -41,7 +41,7 @@ class PinReader:
 
     @property
     def time_passed_since_state_change_minutes(self) -> int:
-        return self.time_passed_since_state_change.seconds // 3600
+        return self.time_passed_since_state_change.seconds // 60
 
     @property
     def is_open(self) -> bool:

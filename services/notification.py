@@ -20,6 +20,6 @@ def send_notification(message):
     if hasattr(notification, "status_code"):
         log = logger
         if notification.success:
-            log.info(msg=f"Message send successfully: {message}")
+            log.info(msg=f"Message sent successfully: {message}")
         else:
             log.error(msg=f"Error sending message: {notification.response.text}")
