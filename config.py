@@ -1,7 +1,6 @@
 from typing import Optional
 
-import logging
-from systemd.journal import JournaldLogHandler
+import logging.config
 
 from pydantic import AnyUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -31,8 +30,28 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-logger = logging.getLogger(__name__)
-journald_handler = JournaldLogHandler()
-journald_handler.setFormatter(logging.Formatter('[%(levelname)s]     %(message)s'))
-logger.addHandler(journald_handler)
-logger.setLevel(logging.INFO)
+LOGGING_CONFIG = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default_formatter': {
+            'format': '[%(levelname)s:%(asctime)s] %(message)s'
+        },
+    },
+    'handlers': {
+        'stream_handler': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'default_formatter',
+        },
+    },
+    'loggers': {
+        'mainLogger': {
+            'handlers': ['stream_handler'],
+            'level': 'INFO',
+            'propagate': True
+        }
+    }
+}
+
+logging.config.dictConfig(LOGGING_CONFIG)
+logger = logging.getLogger('mainLogger')
