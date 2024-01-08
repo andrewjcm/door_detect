@@ -1,9 +1,9 @@
 from typing import Optional
-
-import logging.config
-
 from pydantic import AnyUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+import logging.config
+import os
 
 
 class Settings(BaseSettings):
@@ -43,10 +43,14 @@ LOGGING_CONFIG = {
             'class': 'logging.StreamHandler',
             'formatter': 'default_formatter',
         },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(os.path.abspath(os.getcwd()), "doordetect.log")
+        }
     },
     'loggers': {
         'mainLogger': {
-            'handlers': ['stream_handler'],
+            'handlers': ['file', 'stream_handler'],
             'level': 'INFO',
             'propagate': True
         }
