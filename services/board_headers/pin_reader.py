@@ -24,7 +24,7 @@ class PinReader:
 
     @property
     def state_changed(self) -> bool:
-        if self.previous_state is None and self.is_open:
+        if self.is_open and self.previous_state not in list(DoorState):
             return True
         return self.previous_state != self.current_state
 

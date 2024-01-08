@@ -1,11 +1,7 @@
 from services.pushed_co.notification import PushedApiRequest
 from services.pushover.notification import PushoverApiRequest
 from services.nfty.notification import NftyApiRequest
-from config import settings
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+from config import settings, logger
 
 
 def send_notification(message):

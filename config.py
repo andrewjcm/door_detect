@@ -1,5 +1,8 @@
 from typing import Optional
 
+import logging
+from systemd.journal import JournaldLogHandler
+
 from pydantic import AnyUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -28,3 +31,8 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
+logger = logging.getLogger(__name__)
+journald_handler = JournaldLogHandler()
+journald_handler.setFormatter(logging.Formatter('[%(levelname)s]     %(message)s'))
+logger.addHandler(journald_handler)
+logger.setLevel(logging.INFO)
