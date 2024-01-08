@@ -1,4 +1,4 @@
-from services.pin_reader import PinReader
+from services.board_headers.pin_reader import PinReader
 import time
 
 from services.notification import send_notification

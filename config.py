@@ -1,19 +1,13 @@
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import AnyUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-
-class DoorState:
-    OPEN = "Door is open"
-    CLOSED = "Door is closed"
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env')
     DOOR_NAME: str = ""
     PIN: int = 3
-    DOOR_STATE: List[str] = [DoorState.CLOSED, DoorState.OPEN]
 
     # pushed.co settings
     PUSHED_APP_KEY: Optional[str] = None
