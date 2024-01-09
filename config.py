@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     # nfty settings
     NFTY_URL: Optional[AnyUrl] = None
     NFTY_TOPIC_ID: Optional[str] = None
+    NFTY_TOKEN: Optional[str] = None
 
 
 settings = Settings()
