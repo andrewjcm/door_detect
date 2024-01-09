@@ -31,7 +31,7 @@ class PinReader:
 
     @property
     def state_time_elapsed_message(self) -> str:
-        return self.state_message + f" (time elapsed: {self.time_passed_since_state_change})"
+        return self.state_message + f" (time elapsed: {timedelta(minutes=self.time_passed_since_state_change_minutes)})"
 
     @property
     def time_passed_since_state_change(self) -> timedelta:
