@@ -1,3 +1,4 @@
+import requests
 from pydantic import AnyUrl
 
 from config import settings
@@ -9,5 +10,14 @@ class NftyApiRequest(BaseApiRequest):
 
     def __init__(self, message):
         self.payload = message
-        if settings.NFTY_TOKEN:
-            self.url += f"?auth={settings.NFTY_TOKEN}"
+
+    def send(self):
+        if not settings.NFTY_TOKEN:
+            super().send()
+        else:
+            self.response = requests.post(
+                self.url,
+                data=self.payload,
+                headers={"Authorization": f"Bearer {settings.NFTY_TOKEN}"}
+            )
+            self.status_code = self.response.status_code
