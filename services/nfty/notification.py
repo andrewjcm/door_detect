@@ -9,3 +9,5 @@ class NftyApiRequest(BaseApiRequest):
 
     def __init__(self, message):
         self.payload = message
+        if settings.NFTY_TOKEN:
+            self.url += f"?auth={settings.NFTY_TOKEN}"
