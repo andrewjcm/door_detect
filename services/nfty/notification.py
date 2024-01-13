@@ -6,7 +6,10 @@ from services.api_request import BaseApiRequest
 
 
 class NftyApiRequest(BaseApiRequest):
-    url: AnyUrl = str(settings.NFTY_URL) + settings.NFTY_TOPIC_ID
+    if settings.NFTY_URL:
+        url: AnyUrl = str(settings.NFTY_URL) + settings.NFTY_TOPIC_ID
+    else:
+        url: AnyUrl = settings.NFTY_URL
 
     def __init__(self, message):
         self.payload = message
