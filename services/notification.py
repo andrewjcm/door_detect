@@ -9,6 +9,7 @@ def send_notification(message):
     if settings.MQTT_HOST:
         notification = MqttPublish(message)
         notification.send()
+        notification.close()
     elif settings.PUSHED_API_URL:
         notification = PushedApiRequest(message)
         notification.send()
