@@ -28,7 +28,7 @@ class PinReader:
     @property
     def state_message(self) -> Union[str, dict]:
         if settings.MQTT_HOST:
-            return {"state": self.current_state.name, "last_changed": self.time_state_changed}
+            return {"state": self.current_state.name.lower(), "last_changed": self.time_state_changed}
         return f"[{settings.DOOR_NAME}] Door is {self.current_state.name}"
 
     @property
