@@ -11,6 +11,12 @@ class Settings(BaseSettings):
     DOOR_NAME: str = ""
     PIN: int = 3
 
+    # mqtt settings
+    MQTT_USERNAME: Optional[str] = None
+    MQTT_PASSWORD: Optional[str] = None
+    MQTT_HOST: Optional[str] = None
+    MQTT_TOPIC: Optional[str] = None
+
     # pushed.co settings
     PUSHED_APP_KEY: Optional[str] = None
     PUSHED_SECRET: Optional[str] = None

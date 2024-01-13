@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 from datetime import datetime, timedelta
 import RPi.GPIO as GPIO
 
@@ -26,7 +26,9 @@ class PinReader:
         return self.previous_state != self.current_state
 
     @property
-    def state_message(self) -> str:
+    def state_message(self) -> Union[str, dict]:
+        if settings.MQTT_HOST:
+            return {"state": self.current_state.name, "last_changed": self.time_state_changed}
         return f"[{settings.DOOR_NAME}] Door is {self.current_state.name}"
 
     @property
