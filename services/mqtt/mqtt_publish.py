@@ -1,6 +1,6 @@
 from paho.mqtt.client import Client, MQTTv5
 from config import settings
-from schema import MqttPayload
+from services.mqtt.schema import MqttPayload
 
 
 class MqttPublish:
